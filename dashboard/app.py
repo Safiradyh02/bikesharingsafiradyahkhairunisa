@@ -82,9 +82,9 @@ with col2:
     st.metric("Total Registered User", value=registered)
 
 fig, ax = plt.subplots(figsize=(28, 8))
-ax.plot(monthly_sharing_df["date_sharing"], monthly_sharing_df["casual_user"], marker='o', linewidth=2, color="#77BBAA", label="casual user")
-ax.plot(monthly_sharing_df["date_sharing"], monthly_sharing_df["registered_user"], marker='o', linewidth=2, color="#3366BB", label="registered user")
-ax.plot(monthly_sharing_df["date_sharing"], monthly_sharing_df["total_user"], marker='o', linewidth=2, color="#FF6633", label="total user")
+ax.plot(monthly_sharing_df["date_sharing"].values, monthly_sharing_df["casual_user"], marker='o', linewidth=2, color="#77BBAA", label="casual user")
+ax.plot(monthly_sharing_df["date_sharing"].values, monthly_sharing_df["registered_user"], marker='o', linewidth=2, color="#3366BB", label="registered user")
+ax.plot(monthly_sharing_df["date_sharing"].values, monthly_sharing_df["total_user"], marker='o', linewidth=2, color="#FF6633", label="total user")
 ax.tick_params(axis='y', labelsize=20)
 ax.tick_params(axis='x', labelsize=15)
 ax.set_xlabel("Date")
