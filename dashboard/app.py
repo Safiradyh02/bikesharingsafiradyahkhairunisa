@@ -40,7 +40,7 @@ def create_monthly_sharing_df(df):
     return monthly_sharing_df
 
 #loading all data pada bike_df.csv
-bike_df = pd.read_csv(https://raw.githubusercontent.com/Safiradyh02/bikesharingsafiradyahkhairunisa/main/dashboard/bike_df.csv)
+bike_df = pd.read_csv(r'https://raw.githubusercontent.com/Safiradyh02/bikesharingsafiradyahkhairunisa/main/dashboard/bike_df.csv')
 
 datetime_columns = ["dteday"]
  
