@@ -43,17 +43,17 @@ def create_monthly_sharing_df(df):
 bike_df = pd.read_csv(r'https://raw.githubusercontent.com/Safiradyh02/bikesharingsafiradyahkhairunisa/main/dashboard/bike_df.csv')
 
 datetime_columns = ["dteday"]
- 
+
 for column in datetime_columns:
     bike_df[column] = pd.to_datetime(bike_df[column])
 
 min_date = bike_df["dteday"].min()
 max_date = bike_df["dteday"].max()
- 
+
 with st.sidebar:
     # Menambahkan logo perusahaan
     st.image("dashboard/rental bike logo.jpg")
-    
+
     # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
         label='Rentang Waktu',min_value=min_date,
@@ -61,7 +61,7 @@ with st.sidebar:
         value=[min_date, max_date]
     )
 
-main_df = bike_df[(bike_df["dteday"] >= str(start_date)) & 
+main_df = bike_df[(bike_df["dteday"] >= str(start_date)) &
                 (bike_df["dteday"] <= str(end_date))]
 
 byweather_df = create_byweather_df(main_df)
@@ -72,13 +72,13 @@ monthly_sharing_df = create_monthly_sharing_df(main_df)
 st.subheader('Total Bike Rental by Month')
 
 col1, col2 = st.columns(2)
- 
+
 with col1:
     casual = main_df.casual_hourly.sum()
     st.metric("Total Casual User", value=casual)
- 
+
 with col2:
-    registered = main_df.registered_hourly.sum() 
+    registered = main_df.registered_hourly.sum()
     st.metric("Total Registered User", value=registered)
 
 fig, ax = plt.subplots(figsize=(28, 8))
@@ -95,15 +95,17 @@ st.pyplot(fig)
 #Membuat Sub-Header (Bike Rental Performance by Weather)
 st.subheader("Bike Rental Performance by Weather")
 
-plt.figure(figsize=(8, 4))
+fig, ax = plt.subplots(figsize=(18, 10))
 
 sns.barplot(
-    y=("Clear", "Cloudy", "Light rain", "Heavy rain"),
-    x=(2338173, 795952, 158331, 223)
-)
-plt.title("Total Bike Rental by Weather", loc="center", fontsize=15)
-plt.xlabel("Average sharing")
-plt.ylabel("Weather")
+    y="Total_user",
+    x="Weather",
+    data=byweather_df.sort_values(by="Total_user", ascending=False),
+    ax=ax
+    )
+ax.set_title("Bike Rental Performance ", loc="center", fontsize=50)
+ax.set_ylabel("Total sharing")
+ax.set_xlabel("Weather")
 st.pyplot(fig)
 
 st.caption('Safira Dyah Khairunisa')
