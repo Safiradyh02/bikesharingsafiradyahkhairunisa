@@ -81,10 +81,18 @@ with col2:
     registered = main_df.registered_hourly.sum()
     st.metric("Total Registered User", value=registered)
 
+
+# Convert 'date_sharing' column to datetime objects
+monthly_sharing_df['date_sharing'] = pd.to_datetime(monthly_sharing_df['date_sharing'])
+
+# Set 'date_sharing' column as the index
+monthly_sharing_df.set_index('date_sharing', inplace=True)
+
+# Plotting
 fig, ax = plt.subplots(figsize=(28, 8))
-ax.plot(monthly_sharing_df["date_sharing"], monthly_sharing_df["casual_user"], marker='o', linewidth=2, color="#77BBAA", label="casual user")
-ax.plot(monthly_sharing_df["date_sharing"], monthly_sharing_df["registered_user"], marker='o', linewidth=2, color="#3366BB", label="registered user")
-ax.plot(monthly_sharing_df["date_sharing"], monthly_sharing_df["total_user"], marker='o', linewidth=2, color="#FF6633", label="total user")
+ax.plot(monthly_sharing_df.index, monthly_sharing_df["casual_user"], marker='o', linewidth=2, color="#77BBAA", label="casual user")
+ax.plot(monthly_sharing_df.index, monthly_sharing_df["registered_user"], marker='o', linewidth=2, color="#3366BB", label="registered user")
+ax.plot(monthly_sharing_df.index, monthly_sharing_df["total_user"], marker='o', linewidth=2, color="#FF6633", label="total user")
 ax.tick_params(axis='y', labelsize=20)
 ax.tick_params(axis='x', labelsize=15)
 ax.set_xlabel("Date")
