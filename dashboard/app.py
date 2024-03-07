@@ -95,17 +95,15 @@ st.pyplot(fig)
 #Membuat Sub-Header (Bike Rental Performance by Weather)
 st.subheader("Bike Rental Performance by Weather")
 
-fig, ax = plt.subplots(figsize=(18, 10))
+plt.figure(figsize=(8, 4))
 
 sns.barplot(
-    y="Total_user", 
-    x="Weather",
-    data=byweather_df.sort_values(by="Total_user", ascending=False),
-    ax=ax
-    )
-ax.set_title("Bike Rental Performance ", loc="center", fontsize=50)
-ax.set_ylabel("Total sharing")
-ax.set_xlabel("Weather")
+    y=("Clear", "Cloudy", "Light rain", "Heavy rain"),
+    x=(2338173, 795952, 158331, 223)
+)
+plt.title("Total Bike Rental by Weather", loc="center", fontsize=15)
+plt.xlabel("Average sharing")
+plt.ylabel("Weather")
 st.pyplot(fig)
 
 st.caption('Safira Dyah Khairunisa')
