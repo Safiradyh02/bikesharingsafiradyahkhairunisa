@@ -52,7 +52,7 @@ max_date = bike_df["dteday"].max()
 
 with st.sidebar:
     # Menambahkan logo perusahaan
-    st.image("rental bike logo.jpg")
+    st.image("dashboard/rental bike logo.jpg")
 
     # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
